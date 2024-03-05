@@ -4,7 +4,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Load Data
-@st.cache_data
+@st.cache
 def load_data():
     df = pd.read_csv('dashboard/day.csv')  # Mengubah path direktori file day.csv
     return df
@@ -12,12 +12,8 @@ def load_data():
 df = load_data()
 
 # Cetak nama kolom yang ada dalam DataFrame
-st.write("weathersit, dteday")
-st.write(df.columns)
-
-st.write("dteday")
-st.write(df.columns)
-
+st.write("weathersit", "dteday")
+st.write(df[["weathersit", "dteday"]])
 
 # Data Wrangling
 df['dteday'] = pd.to_datetime(df['dteday'])
@@ -38,3 +34,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
