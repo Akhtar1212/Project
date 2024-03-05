@@ -32,16 +32,5 @@ def main():
     st.sidebar.write("- **Email:** m295d4ky1879@bangkit.academy")
     st.sidebar.write("- **ID Dicoding:** https://www.dicoding.com/users/akhtar_ramadhan/")
 
-    st.title("Dashboard Visualisasi Data Bike Sharing")
-
-    st.write("### Visualisasi 1: Jumlah Sepeda yang Disewakan Berdasarkan Kondisi Cuaca")
-    # Hapus visualisasi grafik di sini
-
-    st.write("### Visualisasi 2: Jumlah Sepeda yang Disewakan Berdasarkan Musim")
-    # Hapus visualisasi grafik di sini
-
-    st.write("### Visualisasi 3: Distribusi Total Sepeda yang Disewakan Berdasarkan Musim dan Hari Kerja")
-    # Hapus visualisasi grafik di sini
-
 if __name__ == '__main__':
     main()
