@@ -4,7 +4,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Load Data
-@st.cache_data
+@st.cache
 def load_data():
     df = pd.read_csv('dashboard/day.csv')  # Mengubah path direktori file day.csv
     return df
@@ -16,6 +16,7 @@ st.write("dteday")
 st.write(df["dteday"])
 
 # Data Wrangling
+pd.set_option('mode.use_inf_as_null', True)  # Menangani nilai infinitas
 df['dteday'] = pd.to_datetime(df['dteday'])
 df.drop(columns=['instant', 'temp', 'casual', 'registered'], inplace=True)
 df.dropna(inplace=True)
