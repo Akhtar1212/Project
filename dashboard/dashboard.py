@@ -4,7 +4,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Load Data
-@st.cache
+@st.cache_resource
 def load_data():
     df = pd.read_csv('dashboard/day.csv')  # Mengubah path direktori file day.csv
     return df
