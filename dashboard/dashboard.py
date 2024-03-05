@@ -4,9 +4,9 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Load Data
-@st.cache_data
+@st.cache
 def load_data():
-    df = pd.read_csv('dashboard/day.csv')  # Mengubah path direktori file day.csv
+    df = pd.read_csv('dashboard/day.csv')  # Update the file path to your actual directory for day.csv
     return df
 
 df = load_data()
@@ -26,6 +26,8 @@ df['weathersit'] = df['weathersit'].map({1:"cerah", 2:"berawan", 3:"hujan ringan
 
 # Visualization & Explanatory Analysis
 def visualize():
+    pd.set_option('mode.use_inf_as_null', True)  # Set this option globally
+
     st.sidebar.title("Informasi Pengguna")
     st.sidebar.subheader("Data Diri")
     st.sidebar.write("- **Nama:** Akhtar Ramadhan Putra")
