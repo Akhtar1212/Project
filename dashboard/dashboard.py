@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 # Load Data
 @st.cache_resource
 def load_data():
-    df = pd.read_csv('D:/PROJECT/day.csv')  # Mengubah path direktori file day.csv
+    df = pd.read_csv('dashboard/day.csv')  # Mengubah path direktori file day.csv
     return df
 
 df = load_data()
