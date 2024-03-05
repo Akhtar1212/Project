@@ -1,5 +1,6 @@
-import streamlit as st
 import pandas as pd
+pd.set_option('mode.use_inf_as_na', True)
+import streamlit as st
 import seaborn as sns
 import matplotlib.pyplot as plt
 
