@@ -26,34 +26,45 @@ df['season'] = df['season'].map({1:"semi", 2:"panas", 3:"gugur", 4:"salju"})
 df['weathersit'] = df['weathersit'].map({1:"cerah", 2:"berawan", 3:"hujan ringan", 4:"hujan deras"})
 
 # Visualisasi Grafik
-st.write("### Visualisasi Data")
-st.write("#### Grafik Jumlah Sepeda yang Disewakan Berdasarkan Kondisi Cuaca")
-fig, ax = plt.subplots(figsize=(10, 6))
-sns.lineplot(data=df, x="dteday", y="cnt", hue="weathersit", ax=ax)
-plt.xlabel("Tanggal")
-plt.ylabel("Jumlah Sepeda")
-plt.title("Jumlah Sepeda yang Disewakan Berdasarkan Kondisi Cuaca")
-st.pyplot(fig)
+st.sidebar.title("Dataset Bike Share")
+# Show the dataset
+if st.sidebar.checkbox("Show Dataset"):
+    st.subheader("Raw Data")
+    st.write(data)
 
-st.write("#### Grafik Jumlah Sepeda yang Disewakan Berdasarkan Musim")
-fig, ax = plt.subplots(figsize=(10, 6))
-sns.barplot(data=df, x="season", y="cnt", hue="yr", palette="rocket", ci=None, ax=ax)
-plt.ylabel("Jumlah Sepeda")
-plt.xlabel("Musim")
-plt.title("Jumlah Sepeda yang Disewakan Berdasarkan Musim")
-plt.xticks([0,1,2,3],['Semi', 'Panas', 'Gugur', 'Salju'])
-plt.legend(title='Tahun', loc='best', labels=['2011', '2012'], frameon=False)
-st.pyplot(fig)
+# Display summary statistics
+if st.sidebar.checkbox("Show Summary Statistics"):
+    st.subheader("Summary Statistics")
+    st.write(data.describe())
 
-st.write("#### Distribusi Total Sepeda yang Disewakan Berdasarkan Musim dan Hari Kerja")
-fig, ax = plt.subplots(figsize=(10, 6))
-sns.boxplot(data=df, x='season', y='cnt', hue='workingday', ax=ax)
-plt.xlabel('Musim')
-plt.ylabel('Jumlah Sepeda')
-plt.title('Distribusi Total Sepeda yang Disewakan Berdasarkan Musim dan Hari Kerja')
-plt.legend(title='Hari Kerja', loc='best', labels=['Non-Working Day', 'Working Day'], frameon=False)
-plt.xticks([0,1,2,3],['Semi', 'Panas', 'Gugur', 'Salju'])
-st.pyplot(fig)
+# Show dataset source
+st.sidebar.markdown("[Download Dataset](https://www.kaggle.com/code/ramanchandra/bike-sharing-data-analysis)")
+
+
+# VISUALIZATION
+
+
+# yearly bike share count
+# st.subheader("Hourly Bike Share Count")
+yearly_count = data.groupby("yr")["cnt"].sum().reset_index()
+fig_yearly_count = px.line(
+    yearly_count, x="yr", y="cnt", title="Jumlah Jam Penyewaan Sepeda per Tahun")
+st.plotly_chart(fig_yearly_count, use_container_width=True,
+                height=400, width=600)
+
+# daily bike share count
+# st.subheader("Hourly Bike Share Count")
+dteday_count = data.groupby("dteday")["cnt"].sum().reset_index()
+fig_dteday_count = px.line(
+    dteday_count, x="dteday", y="cnt", title="Jumlah Penyewaan Sepeda per Tanggal")
+st.plotly_chart(fig_dteday_count, use_container_width=True,
+                height=400, width=600)
+
+
+# Show data source and description
+st.sidebar.title("About")
+st.sidebar.info("Dashboard ini menampilkan visualisasi untuk sekumpulan data Bike Share. "
+                "Dataset ini mengandung informasi mengenai penyewaan sepeda berdasarkan berbagai variabel seperti musim, suhu, kelembaban, dan faktor lainnya.")
 
 # Main Function
 def main():
