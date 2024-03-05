@@ -24,8 +24,8 @@ df['mnth'] = df['mnth'].map({1:"Jan", 2:"Feb", 3:"Mar", 4:"Apr", 5:"May", 6:"Jun
 df['season'] = df['season'].map({1:"semi", 2:"panas", 3:"gugur", 4:"salju"})
 df['weathersit'] = df['weathersit'].map({1:"cerah", 2:"berawan", 3:"hujan ringan", 4:"hujan deras"})
 
-# Visualization & Explanatory Analysis
-def visualize():
+# Main Function
+def main():
     st.sidebar.title("Informasi Pengguna")
     st.sidebar.subheader("Data Diri")
     st.sidebar.write("- **Nama:** Akhtar Ramadhan Putra")
@@ -61,10 +61,6 @@ def visualize():
     plt.legend(title='Hari Kerja', loc='best', labels=['Non-Working Day', 'Working Day'], frameon=False)
     plt.xticks([0,1,2,3],['Semi', 'Panas', 'Gugur', 'Salju'])
     st.pyplot(fig)
-
-# Main Function
-def main():
-    visualize()
 
 if __name__ == '__main__':
     main()
