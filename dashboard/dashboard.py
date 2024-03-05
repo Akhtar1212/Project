@@ -34,7 +34,5 @@ def main():
     st.header("Data Summary")
     st.write(df.head())
 
-    st.header("Data Visualization")
-
 if __name__ == '__main__':
     main()
