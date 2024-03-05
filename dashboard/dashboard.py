@@ -1,78 +1,64 @@
-import pandas as pd
 import streamlit as st
+import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Load Data
-@st.cache_data
+@st.cache
 def load_data():
-    df = pd.read_csv('dashboard/day.csv')  # Mengubah path direktori file day.csv
+    df = pd.read_csv('dashboard/day.csv')
     return df
 
+# Load the data
 df = load_data()
 
-# Cetak nama kolom yang ada dalam DataFrame
-st.write("dteday")
-st.write(df["dteday"])
+# Sidebar
+st.sidebar.title("Informasi Pengguna")
+st.sidebar.subheader("Data Diri")
+st.sidebar.write("- **Nama:** Akhtar Ramadhan Putra")
+st.sidebar.write("- **Email:** m295d4ky1879@bangkit.academy")
+st.sidebar.write("- **ID Dicoding:** https://www.dicoding.com/users/akhtar_ramadhan/")
+
+# Main Content
+st.title("Dashboard Analisis Data Bike Sharing")
 
 # Data Wrangling
-pd.set_option('mode.use_inf_as_null', True)  # Menangani nilai infinitas
 df['dteday'] = pd.to_datetime(df['dteday'])
-df.drop(columns=['instant', 'temp', 'casual', 'registered'], inplace=True)
-df.dropna(inplace=True)
 df['mnth'] = df['mnth'].map({1:"Jan", 2:"Feb", 3:"Mar", 4:"Apr", 5:"May", 6:"Jun", 7:"Jul", 8:"Aug",
                               9:"Sep", 10:"Oct", 11:"Nov", 12:"Dec"})
 df['season'] = df['season'].map({1:"semi", 2:"panas", 3:"gugur", 4:"salju"})
 df['weathersit'] = df['weathersit'].map({1:"cerah", 2:"berawan", 3:"hujan ringan", 4:"hujan deras"})
 
-# Visualisasi Grafik
-st.sidebar.title("Dataset Bike Share")
-# Show the dataset
-if st.sidebar.checkbox("Show Dataset"):
-    st.subheader("Raw Data")
-    st.write(data)
+# Visualizations
+st.header("Visualisasi Data")
 
-# Display summary statistics
-if st.sidebar.checkbox("Show Summary Statistics"):
-    st.subheader("Summary Statistics")
-    st.write(data.describe())
+# Visualisasi 1: Jumlah Sepeda yang Disewakan Berdasarkan Kondisi Cuaca
+st.subheader("Visualisasi 1: Jumlah Sepeda yang Disewakan Berdasarkan Kondisi Cuaca")
+fig1, ax1 = plt.subplots(figsize=(10, 6))
+sns.lineplot(data=df, x="dteday", y="cnt", hue="weathersit", ax=ax1)
+plt.xlabel("Tanggal")
+plt.ylabel("Jumlah Sepeda")
+plt.title("Jumlah Sepeda yang Disewakan Berdasarkan Kondisi Cuaca")
+st.pyplot(fig1)
 
-# Show dataset source
-st.sidebar.markdown("[Download Dataset](https://www.kaggle.com/code/ramanchandra/bike-sharing-data-analysis)")
+# Visualisasi 2: Jumlah Sepeda yang Disewakan Berdasarkan Musim
+st.subheader("Visualisasi 2: Jumlah Sepeda yang Disewakan Berdasarkan Musim")
+fig2, ax2 = plt.subplots(figsize=(10, 6))
+sns.barplot(data=df, x="season", y="cnt", hue="yr", palette="rocket", ci=None, ax=ax2)
+plt.ylabel("Jumlah Sepeda")
+plt.xlabel("Musim")
+plt.title("Jumlah Sepeda yang Disewakan Berdasarkan Musim")
+plt.xticks([0,1,2,3],['Semi', 'Panas', 'Gugur', 'Salju'])
+plt.legend(title='Tahun', loc='best', labels=['2011', '2012'], frameon=False)
+st.pyplot(fig2)
 
-
-# VISUALIZATION
-
-
-# yearly bike share count
-# st.subheader("Hourly Bike Share Count")
-yearly_count = data.groupby("yr")["cnt"].sum().reset_index()
-fig_yearly_count = px.line(
-    yearly_count, x="yr", y="cnt", title="Jumlah Jam Penyewaan Sepeda per Tahun")
-st.plotly_chart(fig_yearly_count, use_container_width=True,
-                height=400, width=600)
-
-# daily bike share count
-# st.subheader("Hourly Bike Share Count")
-dteday_count = data.groupby("dteday")["cnt"].sum().reset_index()
-fig_dteday_count = px.line(
-    dteday_count, x="dteday", y="cnt", title="Jumlah Penyewaan Sepeda per Tanggal")
-st.plotly_chart(fig_dteday_count, use_container_width=True,
-                height=400, width=600)
-
-
-# Show data source and description
-st.sidebar.title("About")
-st.sidebar.info("Dashboard ini menampilkan visualisasi untuk sekumpulan data Bike Share. "
-                "Dataset ini mengandung informasi mengenai penyewaan sepeda berdasarkan berbagai variabel seperti musim, suhu, kelembaban, dan faktor lainnya.")
-
-# Main Function
-def main():
-    st.sidebar.title("Informasi Pengguna")
-    st.sidebar.subheader("Data Diri")
-    st.sidebar.write("- **Nama:** Akhtar Ramadhan Putra")
-    st.sidebar.write("- **Email:** m295d4ky1879@bangkit.academy")
-    st.sidebar.write("- **ID Dicoding:** https://www.dicoding.com/users/akhtar_ramadhan/")
-
-if __name__ == '__main__':
-    main()
+# Visualisasi 3: Distribusi Total Sepeda yang Disewakan Berdasarkan Musim dan Hari Kerja
+st.subheader("Visualisasi 3: Distribusi Total Sepeda yang Disewakan Berdasarkan Musim dan Hari Kerja")
+fig3, ax3 = plt.subplots(figsize=(10, 6))
+sns.boxplot(data=df, x='season', y='cnt', hue='workingday', ax=ax3)
+plt.xlabel('Musim')
+plt.ylabel('Jumlah Sepeda')
+plt.title('Distribusi Total Sepeda yang Disewakan Berdasarkan Musim dan Hari Kerja')
+plt.legend(title='Hari Kerja', loc='best', labels=['Non-Working Day', 'Working Day'], frameon=False)
+plt.xticks([0,1,2,3],['Semi', 'Panas', 'Gugur', 'Salju'])
+st.pyplot(fig3)
