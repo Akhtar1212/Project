@@ -1,7 +1,5 @@
 import streamlit as st
 import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
 
 # Load Data
 @st.cache_data
@@ -33,6 +31,9 @@ df['weathersit'] = df['weathersit'].map({1:"cerah", 2:"berawan", 3:"hujan ringan
 def main():
     st.header("Data Summary")
     st.write(df.head())
+
+    st.header("Informasi Statistik Data")
+    st.write(df.describe())
 
 if __name__ == '__main__':
     main()
