@@ -13,7 +13,7 @@ df = load_data()
 
 # Cetak nama kolom yang ada dalam DataFrame
 st.write("weathersit")
-st.write(df[["weathersit"]])
+st.write(df["weathersit"])
 
 # Data Wrangling
 df['dteday'] = pd.to_datetime(df['dteday'])
