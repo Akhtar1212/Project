@@ -46,11 +46,4 @@ def visualize():
     sns.barplot(data=df,x="season",  y="cnt", hue="yr", palette="rocket",  ci=None, ax=ax) # Plot the number of bikes rented per season with different years
     plt.ylabel('Jumlah')
     plt.xlabel('Musim')
-    plt.title("Jumlah Sepeda yang Disewakan Berdasarkan Musim")
-    plt.xticks([0,1,2,3],['Semi', 'Panas', 'Gugur', 'Salju'])
-    plt.legend(title='Tahun', loc='best', labels=['2011', '2012'], frameon=False)
-    st.pyplot(fig)
-
-    st.write("### Visualisasi 3: Distribusi Total Sepeda yang Disewakan Berdasarkan Musim dan Hari Kerja")
-    fig, ax = plt.subplots(figsize=(10,6))
-    sns.boxplot
+    plt.title("Jumlah Sepeda yang Dise
