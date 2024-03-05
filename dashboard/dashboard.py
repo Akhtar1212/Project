@@ -12,7 +12,7 @@ def load_data():
 df = load_data()
 
 # Cetak nama kolom yang ada dalam DataFrame
-st.write("weathersit")
+st.write("weathersit, dteday")
 st.write(df.columns)
 
 st.write("dteday")
