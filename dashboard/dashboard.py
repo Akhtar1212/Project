@@ -4,7 +4,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Load Data
-@st.cache
+@st.cache_data
 def load_data():
     df = pd.read_csv('dashboard/day.csv')  # Mengubah path direktori file day.csv
     return df
@@ -23,13 +23,6 @@ df['mnth'] = df['mnth'].map({1:"Jan", 2:"Feb", 3:"Mar", 4:"Apr", 5:"May", 6:"Jun
                               9:"Sep", 10:"Oct", 11:"Nov", 12:"Dec"})
 df['season'] = df['season'].map({1:"semi", 2:"panas", 3:"gugur", 4:"salju"})
 df['weathersit'] = df['weathersit'].map({1:"cerah", 2:"berawan", 3:"hujan ringan", 4:"hujan deras"})
-
-# Menambahkan kolom baru
-df = df.assign(
-    yr=lambda x: x['dteday'].dt.year,
-    mnth=lambda x: x['dteday'].dt.month,
-    temp=lambda x: (x['temp'] - 32) * 5/9  # Konversi dari Fahrenheit ke Celsius
-)
 
 # Main Function
 def main():
