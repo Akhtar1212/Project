@@ -15,6 +15,10 @@ df = load_data()
 st.write("weathersit")
 st.write(df.columns)
 
+st.write("dteday")
+st.write(df.columns)
+
+
 # Data Wrangling
 df['dteday'] = pd.to_datetime(df['dteday'])
 df.drop(columns=['instant', 'temp', 'casual', 'registered'], inplace=True)
