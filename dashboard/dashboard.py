@@ -4,12 +4,16 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Load Data
-@st.cache
+@st.cache_data
 def load_data():
     df = pd.read_csv('dashboard/day.csv')  # Mengubah path direktori file day.csv
     return df
 
 df = load_data()
+
+# Cetak nama kolom yang ada dalam DataFrame
+st.write("weathersit")
+st.write(df.columns)
 
 # Data Wrangling
 df['dteday'] = pd.to_datetime(df['dteday'])
