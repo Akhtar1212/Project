@@ -1,5 +1,7 @@
 import streamlit as st
 import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
 
 # Load Data
 @st.cache_data
@@ -34,6 +36,17 @@ def main():
 
     st.header("Informasi Statistik Data")
     st.write(df.describe())
+
+    st.header("Visualisasi Data")
+    # Visualisasi: Distribusi Jumlah Sepeda yang Disewakan Berdasarkan Musim
+    st.subheader("Distribusi Jumlah Sepeda yang Disewakan Berdasarkan Musim")
+    fig, ax = plt.subplots(figsize=(10, 6))
+    sns.boxplot(data=df, x='season', y='cnt', ax=ax)
+    plt.xlabel('Musim')
+    plt.ylabel('Jumlah Sepeda')
+    plt.title('Distribusi Jumlah Sepeda yang Disewakan Berdasarkan Musim')
+    plt.xticks([0, 1, 2, 3], ['Semi', 'Panas', 'Gugur', 'Salju'])
+    st.pyplot(fig)
 
 if __name__ == '__main__':
     main()
