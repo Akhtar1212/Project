@@ -40,13 +40,23 @@ def main():
     st.header("Visualisasi Data")
     # Visualisasi: Distribusi Jumlah Sepeda yang Disewakan Berdasarkan Musim
     st.subheader("Distribusi Jumlah Sepeda yang Disewakan Berdasarkan Musim")
-    fig, ax = plt.subplots(figsize=(10, 6))
-    sns.boxplot(data=df, x='season', y='cnt', ax=ax)
+    fig1, ax1 = plt.subplots(figsize=(10, 6))
+    sns.boxplot(data=df, x='season', y='cnt', ax=ax1)
     plt.xlabel('Musim')
     plt.ylabel('Jumlah Sepeda')
     plt.title('Distribusi Jumlah Sepeda yang Disewakan Berdasarkan Musim')
     plt.xticks([0, 1, 2, 3], ['Semi', 'Panas', 'Gugur', 'Salju'])
-    st.pyplot(fig)
+    st.pyplot(fig1)
+
+    # Visualisasi: Jumlah Sepeda yang Disewakan Berdasarkan Hari dalam Seminggu
+    st.subheader("Jumlah Sepeda yang Disewakan Berdasarkan Hari dalam Seminggu")
+    fig2, ax2 = plt.subplots(figsize=(10, 6))
+    sns.barplot(data=df, x='weekday', y='cnt', ax=ax2)
+    plt.xlabel('Hari dalam Seminggu')
+    plt.ylabel('Jumlah Sepeda')
+    plt.title('Jumlah Sepeda yang Disewakan Berdasarkan Hari dalam Seminggu')
+    plt.xticks([0, 1, 2, 3, 4, 5, 6], ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'])
+    st.pyplot(fig2)
 
 if __name__ == '__main__':
     main()
