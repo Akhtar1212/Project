@@ -17,7 +17,7 @@ st.sidebar.title("Informasi Pengguna")
 st.sidebar.subheader("Data Diri")
 st.sidebar.write("- **Nama:** Akhtar Ramadhan Putra")
 st.sidebar.write("- **Email:** m295d4ky1879@bangkit.academy")
-st.sidebar.write("- **ID Dicoding:** https://www.dicoding.com/users/akhtar_ramadhan/")
+st.sidebar.write("- **ID Dicoding:** [akhtar_ramadhan](https://www.dicoding.com/users/akhtar_ramadhan/)")
 
 # Main Content
 st.title("Dashboard Analisis Data Bike Sharing")
@@ -33,9 +33,11 @@ df['weathersit'] = df['weathersit'].map({1:"cerah", 2:"berawan", 3:"hujan ringan
 def main():
     st.header("Data Summary")
     st.write(df.head())
+    st.markdown("---")  # Garis horizontal
 
     st.header("Informasi Statistik Data")
     st.write(df.describe())
+    st.markdown("---")  # Garis horizontal
 
     st.header("Visualisasi Data")
     # Visualisasi: Distribusi Jumlah Sepeda yang Disewakan Berdasarkan Musim
@@ -47,6 +49,7 @@ def main():
     plt.title('Distribusi Jumlah Sepeda yang Disewakan Berdasarkan Musim')
     plt.xticks([0, 1, 2, 3], ['Semi', 'Panas', 'Gugur', 'Salju'])
     st.pyplot(fig1)
+    st.markdown("---")  # Garis horizontal
 
     # Visualisasi: Jumlah Sepeda yang Disewakan Berdasarkan Hari dalam Seminggu
     st.subheader("Jumlah Sepeda yang Disewakan Berdasarkan Hari dalam Seminggu")
