@@ -4,13 +4,13 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Load Data
-@st.cache_resource
+@st.cache_data
 def load_data():
     df = pd.read_csv('dashboard/day.csv')
-    return data
+    return df
 
 # Load the data
-data = load_data()
+df = load_data()
 
 # Sidebar
 st.sidebar.title("Informasi Pengguna")
