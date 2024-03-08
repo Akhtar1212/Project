@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 @st.cache_data
 def load_data():
     df = pd.read_csv('bike-sharing-dataset/day.csv')
-    return df
+    return data
 
 # Load the data
 df = load_data()
