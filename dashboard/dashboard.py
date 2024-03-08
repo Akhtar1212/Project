@@ -10,7 +10,7 @@ def load_data():
     return data
 
 # Load the data
-df = load_data()
+data = load_data()
 
 # Sidebar
 st.sidebar.title("Informasi Pengguna")
